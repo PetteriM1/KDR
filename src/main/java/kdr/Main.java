@@ -124,7 +124,7 @@ public class Main extends PluginBase implements Listener {
         return (double) getKills(p) / getDeaths(p);
     }
 
-    public double getTopKills() {
+    public int getTopKills() {
         int top = 0;
 
         for (String name : data.getSection("kills").getKeys()) {
@@ -137,7 +137,7 @@ public class Main extends PluginBase implements Listener {
         return top;
     }
 
-    public double getTopDeaths() {
+    public int getTopDeaths() {
         int top = 0;
 
         for (String name : data.getSection("deaths").getKeys()) {

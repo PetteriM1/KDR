@@ -1,0 +1,22 @@
+name: KDR
+main: kdr.Main
+version: "${pom.version}"
+api: ["1.0.0"]
+author: PetteriM1
+
+commands:
+  kdr:
+    permission: kdr.command
+    description: "Kill Death Ratio"
+    usage: "/kdr [player|top]"
+
+permissions:
+  kdr.command:
+    default: true
+    description: "KDR"
+  kdr.top:
+    default: true
+    description: "KDR"
+  kdr.others:
+    default: true
+    description: "KDR"

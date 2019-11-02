@@ -76,7 +76,7 @@ public class Main extends PluginBase implements Listener {
         return true;
     }
 
-    public static String getTopKDRPlayer() {
+    public String getTopKDRPlayer() {
         String topPlayer = "null";
         double topKDR = 0;
 

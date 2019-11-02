@@ -124,6 +124,83 @@ public class Main extends PluginBase implements Listener {
         return (double) getKills(p) / getDeaths(p);
     }
 
+    public double getTopKills() {
+        int top = 0;
+
+        for (String name : data.getSection("kills").getKeys()) {
+            int kills = data.getInt("kills." + name);
+            if (kills > top) {
+                top = kills;
+            }
+        }
+
+        return top;
+    }
+
+    public double getTopDeaths() {
+        int top = 0;
+
+        for (String name : data.getSection("deaths").getKeys()) {
+            int deaths = data.getInt("deaths." + name);
+            if (deaths > top) {
+                top = deaths;
+            }
+        }
+
+        return top;
+    }
+
+    public String getTopKillsPlayer() {
+        String topPlayer = "null";
+        int top = 0;
+
+        for (String name : data.getSection("kills").getKeys()) {
+            int val = data.getInt("kills." + name);
+            if (val > top) {
+                top = val;
+                topPlayer = name;
+            }
+        }
+
+        return topPlayer;
+    }
+
+    public String getTopDeathsPlayer() {
+        String topPlayer = "null";
+        int top = 0;
+
+        for (String name : data.getSection("deaths").getKeys()) {
+            int val = data.getInt("deaths." + name);
+            if (val > top) {
+                top = val;
+                topPlayer = name;
+            }
+        }
+
+        return topPlayer;
+    }
+
+    public void removeKill(Player p) {
+        data.set("kills." + p.getName(), getKills(p) - 1);
+    }
+
+    public void removeDeath(Player p) {
+        data.set("deaths." + p.getName(), getDeaths(p) - 1);
+    }
+
+    public void resetKills(Player p) {
+        data.set("kills." + p.getName(), 0);
+    }
+
+    public void resetDeaths(Player p) {
+        data.set("deaths." + p.getName(), 0);
+    }
+
+    public void resetStats(Player p) {
+        resetKills(p);
+        resetDeaths(p);
+    }
+
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) {
         addDeath(e.getEntity());

@@ -8,14 +8,18 @@ import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.entity.EntityDamageByEntityEvent;
 import cn.nukkit.event.player.PlayerDeathEvent;
+import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
+
+import java.util.ArrayList;
 
 public class Main extends PluginBase implements Listener {
 
     @SuppressWarnings("WeakerAccess")
     public static Main plugin;
     private static Config data;
+    private ArrayList<Player> blacklist;
 
     public void onLoad() {
         plugin = this;
@@ -24,6 +28,7 @@ public class Main extends PluginBase implements Listener {
     public void onEnable() {
         data = new Config(getDataFolder() + "/kdr_data.yml", Config.YAML);
         getServer().getPluginManager().registerEvents(this, this);
+        blacklist = new ArrayList<Player>();
         getServer().getScheduler().scheduleDelayedRepeatingTask(this, this::save, 36000, 36000);
     }
 
@@ -113,11 +118,15 @@ public class Main extends PluginBase implements Listener {
     }
 
     public void addKill(Player p) {
-        data.set("kills." + p.getName(), getKills(p) + 1);
+        if (!blacklist.contains(p)){
+          data.set("kills." + p.getName(), getKills(p) + 1);
+        }
     }
 
     public void addDeath(Player p) {
-        data.set("deaths." + p.getName(), getDeaths(p) + 1);
+        if (!blacklist.contains(p)){
+          data.set("deaths." + p.getName(), getDeaths(p) + 1);
+        }
     }
 
     public double getKDR(Player p) {
@@ -211,4 +220,24 @@ public class Main extends PluginBase implements Listener {
             }
         }
     }
+    
+    @EventHandler
+	public void onJoin(PlayerJoinEvent ev) {
+		Player p = ev.getPlayer();
+        int duplicate = 0;
+        
+        for (Player targetCheck : Server.getInstance().getOnlinePlayers().values()){
+        	if (targetCheck.getAddress() == p.getAddress()){
+        		duplicate++;
+        	}
+        	if (duplicate == 2){
+        		blacklist.add(targetCheck);
+        		blacklist.add(p);
+                duplicate = 0;
+        		break;
+        	}
+        }
+        
+   
+        
 }

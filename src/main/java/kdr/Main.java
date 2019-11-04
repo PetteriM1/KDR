@@ -124,9 +124,7 @@ public class Main extends PluginBase implements Listener {
     }
 
     public void addDeath(Player p) {
-        if (!blacklist.contains(p)){
-          data.set("deaths." + p.getName(), getDeaths(p) + 1);
-        }
+        data.set("deaths." + p.getName(), getDeaths(p) + 1);
     }
 
     public double getKDR(Player p) {

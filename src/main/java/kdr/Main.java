@@ -227,15 +227,16 @@ public class Main extends PluginBase implements Listener {
         int duplicate = 0;
         
         for (Player targetCheck : Server.getInstance().getOnlinePlayers().values()){
-        	if (targetCheck.getAddress() == p.getAddress()){
+           if (targetCheck.getAddress() == p.getAddress()){
         		duplicate++;
-        	}
-        	if (duplicate == 2){
-        		blacklist.add(targetCheck);
-        		blacklist.add(p);
+           }
+           if (duplicate == 2){
+        	
+		blacklist.add(targetCheck);
+        	blacklist.add(p);
                 duplicate = 0;
-        		break;
-        	}
+        	break;
+           }
         }
         
    

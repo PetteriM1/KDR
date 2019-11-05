@@ -220,16 +220,15 @@ public class Main extends PluginBase implements Listener {
     }
     
     @EventHandler
-	public void onJoin(PlayerJoinEvent ev) {
-		Player p = ev.getPlayer();
+    public void onJoin(PlayerJoinEvent ev) {
+	Player p = ev.getPlayer();
         int duplicate = 0;
         
         for (Player targetCheck : Server.getInstance().getOnlinePlayers().values()){
            if (targetCheck.getAddress() == p.getAddress()){
         		duplicate++;
            }
-           if (duplicate == 2){
-        	
+           if (duplicate > 1){
 		blacklist.add(targetCheck);
         	blacklist.add(p);
                 duplicate = 0;

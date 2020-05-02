@@ -46,7 +46,7 @@ public class Main extends PluginBase implements Listener {
                 if (!sender.hasPermission("kdr.top")) {
                     sender.sendMessage("\u00A7cYou don't have permission to see top KDR list");
                 } else {
-                    sender.sendMessage("\u00A76Top KDR on this server: \u00A77" + getTopKDRScore() + " ("+ getTopKDRPlayer() + ")");
+                    sender.sendMessage("\u00A76Top KDR on this server: \u00A77" + String.format("%.2f", getTopKDRScore()) + " ("+ getTopKDRPlayer() + ")");
                 }
 
                 return true;
@@ -63,7 +63,7 @@ public class Main extends PluginBase implements Listener {
             } else {
                 sender.sendMessage("\u00A7a" + target.getName() + "'s kills: " + getKills(target));
                 sender.sendMessage("\u00A7c" + target.getName() + "'s deaths: " + getDeaths(target));
-                sender.sendMessage("\u00A7e" + target.getName() + "'s KDR: " + getKDR(target));
+                sender.sendMessage("\u00A7e" + target.getName() + "'s KDR: " + String.format("%.2f", getKDR(target)));
             }
 
             return true;
@@ -72,7 +72,7 @@ public class Main extends PluginBase implements Listener {
         Player p = (Player) sender;
         sender.sendMessage("\u00A7aKills: " + getKills(p));
         sender.sendMessage("\u00A7cDeaths: " + getDeaths(p));
-        sender.sendMessage("\u00A7eKDR: " + getKDR(p));
+        sender.sendMessage("\u00A7eKDR: " + String.format("%.2f", getKDR(p)));
         return true;
     }
 

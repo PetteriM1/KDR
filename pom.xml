@@ -6,7 +6,7 @@
 
     <groupId>kdr</groupId>
     <artifactId>KDR</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <build>
         <defaultGoal>install</defaultGoal>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
